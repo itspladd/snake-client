@@ -27,6 +27,48 @@ const handleInput = key => {
     case "d":
       connection.write("Move: right");
       break;
+    case "g":
+      connection.write("Say: GG");
+      break;
+    case "f":
+      connection.write("Say: RIP");
+      break;
+    case "q":
+      connection.write("Say: how dare you");
+      break;
+    case "1":
+      connection.write("Say: bacon is superior");
+      break;
+    case "2":
+      connection.write("Say: hashbrowns overrated");
+      break;
+    case "3":
+      connection.write("Say: fight me francis");
+      break;
+    case "z":
+      connection.write("Say: Hello! Zuko here.");
+      break;
+    case "]":
+      connection.write("Say: aw no emoji");
+      break;
+    case "0":
+      connection.write("Say: my corner. no touch.");
+      break;
+    case "9":
+      connection.write("Say: SO FANCY.");
+      break;
+    case "8":
+      connection.write("Say: I want spinners.");
+      break;
+    case "y":
+      connection.write("Say: (•_•)");
+      break;
+    case "u":
+      connection.write("Say: ( •_•)>⌐■-■");
+      break;
+    case "i":
+      connection.write("Say: (⌐■_■)");
+      break;
   }
 };
 

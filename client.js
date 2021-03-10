@@ -1,16 +1,16 @@
 const net = require("net");
+const { IP, PORT } = require('./constants');
 
 const connect = () => {
   const socket = net.createConnection({
-  host: "135.23.222.131",
-  port: "50542"
+  host: IP,
+  port: PORT
   });
   socket.setEncoding("utf8");
 
   socket.on('connect', () => {
     console.log("Connection established!");
     socket.write('Name: PLD');
-    //setInterval( () => socket.write('Move: up'), 50);
   });
 
   socket.on('data', data => {
