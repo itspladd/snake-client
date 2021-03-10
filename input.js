@@ -19,10 +19,12 @@ const run = (callback) => {
 const handleInput = key => {
   if (key === "\u0003") {
     process.exit();
-  } else if (typeof INPUTMAP[key] !== "string") {
-    run(INPUTMAP[key]);
-  } else {
-    connection.write(INPUTMAP[key]);
+  } else if (INPUTMAP[key]) {
+    if (typeof INPUTMAP[key] === "function") {
+      run(INPUTMAP[key]);
+    } else {
+      connection.write(INPUTMAP[key]);
+    }
   }
 };
 

@@ -1,7 +1,10 @@
+const fs = require('fs');
+
 const IP = "135.23.222.131";
 const PORT = 50542;
 
 let activeAnim;
+let activeAutoMove;
 
 const animBase = {
   spinner: ["|", "/", "—", "\\", "|", "/", "—", "\\", "|"]
@@ -11,6 +14,29 @@ const anims = {
   spinner: animBase.spinner,
   spinForever: animBase.spinner.map( x => x + "SPIN FOREVER" + x),
   sunglasses: ["(•_•)", "( •_•)>⌐■-■", "(⌐■_■)"],
+  bee: fs.readFileSync("./bee.txt", { encoding: "utf8" })
+    .replace(/\s/g, " ")
+    .split(" ")
+    .filter(x => x !== "" && x !== "-")
+}
+
+const autoMoves = {
+  smallCircle: ["w", "w", "a", "a", "s", "s", "d", "d"],
+}
+
+const autoMove = (sequence) => {
+  let i = 0;
+  let seq = autoMoves[sequence];
+  if (activeAutoMove) {
+    stopMove();
+  }
+  activeAutoMove = setInterval( () => {
+    if (i === seq.length) {
+      i = 0;
+    }
+    connection.write(INPUTMAP[seq[i]]);
+    i++;
+  }, 1000);
 }
 
 const anim = (strings, delay = 100, loop = true) => {
@@ -34,65 +60,30 @@ const anim = (strings, delay = 100, loop = true) => {
 const stopAnim = () => {
   clearInterval(activeAnim);
   connection.write("Say:  ");
-}
+};
+
+const stopMove = () => {
+  clearInterval(activeAutoMove);
+};
 
 const INPUTMAP = {
   w: "Move: up",
   a: "Move: left",
   s: "Move: down",
   d: "Move: right",
+  r: "Say: RIP",
+  o: "Say: My corner! No touch!",
+  p: "Say: no talk me i angy",
   q: stopAnim,
   e: "Say: MINE.",
   x: () => anim("spinner", 100),
   f: () => anim("sunglasses", 500, false),
-  c: () => anim("spinForever", 100)
+  c: () => anim("spinForever", 100),
+  b: () => anim("bee", 1000),
+  0: () => autoMove("smallCircle"),
+  9: stopMove,
+  t: "Say: who you callin creepy",
 }
-
-
-
-
-    /* case "g":
-      connection.write("Say: GG");
-      break;
-    case "f":
-      connection.write("Say: RIP");
-      break;
-    case "q":
-      connection.write("Say: how dare you");
-      break;
-    case "1":
-      connection.write("Say: bacon is superior");
-      break;
-    case "2":
-      connection.write("Say: hashbrowns overrated");
-      break;
-    case "3":
-      connection.write("Say: fight me francis");
-      break;
-    case "z":
-      connection.write("Say: Hello! Zuko here.");
-      break;
-    case "]":
-      connection.write("Say: aw no emoji");
-      break;
-    case "0":
-      connection.write("Say: my corner. no touch.");
-      break;
-    case "9":
-      connection.write("Say: SO FANCY.");
-      break;
-    case "8":
-      connection.write("Say: I want spinners.");
-      break;
-    case "y":
-      connection.write("Say: (•_•)");
-      break;
-    case "u":
-      connection.write("Say: ( •_•)>⌐■-■");
-      break;
-    case "i":
-      connection.write("Say: (⌐■_■)");
-      break; */
 
 module.exports = {
   IP,
