@@ -7,6 +7,8 @@ const connect = () => {
   });
   socket.setEncoding("utf8");
 
+  socket.on('connect', () => console.log("Connection established!"));
+
   socket.on('data', data => {
     console.log(data);
   });
