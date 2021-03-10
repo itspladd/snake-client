@@ -22,6 +22,7 @@ const anims = {
 
 const autoMoves = {
   smallCircle: ["w", "w", "a", "a", "s", "s", "d", "d"],
+  medCircle: ["w", "w", "w", "w", "a", "a", "a", "a", "s", "s", "s", "s", "d", "d", "d", "d"],
 }
 
 const autoMove = (sequence) => {
@@ -81,6 +82,7 @@ const INPUTMAP = {
   c: () => anim("spinForever", 100),
   b: () => anim("bee", 1000),
   0: () => autoMove("smallCircle"),
+  "}": () => autoMove("medCircle"),
   9: stopMove,
   t: "Say: who you callin creepy",
 }
