@@ -17,7 +17,7 @@ const connect = () => {
     console.log(data);
   });
 
-  return connect;
+  return socket;
 };
 
 module.exports = connect;

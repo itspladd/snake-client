@@ -3,6 +3,6 @@ const configInput = require("./input");
 
 console.log('Connecting...');
 
-connect();
+connection = connect();
 
-configInput();
+configInput(connection);
