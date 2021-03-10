@@ -7,7 +7,10 @@ const connect = () => {
   });
   socket.setEncoding("utf8");
 
-  socket.on('connect', () => console.log("Connection established!"));
+  socket.on('connect', () => {
+    console.log("Connection established!");
+    socket.write('Name: PLD');
+  });
 
   socket.on('data', data => {
     console.log(data);
