@@ -10,6 +10,7 @@ const connect = () => {
   socket.on('connect', () => {
     console.log("Connection established!");
     socket.write('Name: PLD');
+    //setInterval( () => socket.write('Move: up'), 50);
   });
 
   socket.on('data', data => {
